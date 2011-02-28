@@ -1,4 +1,4 @@
-	ALL=L4.1.1.pdf nuxeo-requirements.pdf
+	ALL=L4.1.1.pdf nuxeo-requirements.pdf nuxeo-requirements-sp1.pdf
 
 all: $(ALL)
 
@@ -9,4 +9,4 @@ all: $(ALL)
 	markdown2pdf $<
 
 clean:
-	rm -f $(ALL) *.out *.dvi *.aux *.log *.idx
+	rm -f $(ALL) *.out *.dvi *.aux *.log *.idx *.toc

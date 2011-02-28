@@ -1,8 +1,6 @@
 # Requirements for the Nuxeo Pilot (WP 4.1)
 
-## Abstract
-
-This document presents the requirements identified by Nuxeo for the development of its cloud-aware enterprise content management platform, aka WP 4.1.
+> **Abstract:** This document presents the requirements identified by Nuxeo for the development of the cloud-aware enterprise content management demonstrator, aka WP 4.1.
 
 ## High level requirements
 
@@ -12,7 +10,7 @@ Nuxeo Connect users can already use the configuration services provided by Nuxeo
 
 In the future, we want to leverage the Cloud infrastructure to let the user directly test his customization on a Cloud instance.
 
-This basically means :
+This basically means:
 
  - create the target VM
 
@@ -42,13 +40,13 @@ This includes:
 
 ### ECM as a service
 
-Nuxeo ECM platform provides several technology neutral API to access and manage content :
+Nuxeo ECM platform provides several technology neutral API to access and manage content:
 
- - CMIS connector : standard compliant interoperability protocols 
+ - CMIS connector: standard compliant interoperability protocols 
 
- - Content Automation : Extensible and Business friendly REST API
+ - Content Automation: Extensible and Business friendly REST API
 
-One of the goal of Nuxeo's Cloud approach is to be able to provide ECM features as a service via CMIS and Content Automation.
+One of the goals of Nuxeo's Cloud approach is to be able to provide ECM features as a service via CMIS and Content Automation.
 
 ## Technical requirements
 
@@ -67,8 +65,8 @@ Our goal is to be able to have distributions based on OSGi rather than maven.
 This means having a descriptor listing the required bundles and letting the OSGi deployment and provisionning system pull and activate the needed bundles dynamically.
 
 This kind of features is for example available using some forked versions of P2 director with Equinox.
- 
-At the end this high level descriptor should be enough to create a specific instance of Nuxeo on the Cloud :
+
+At the end this high level descriptor should be enough to create a specific instance of Nuxeo on the Cloud:
 
  - the descriptor contains the list of needed features
 
@@ -84,9 +82,10 @@ For illustration purpose, the target command line could look something like:
 
     > compatible --deploy <software-descriptor-url> <instance-descriptor-url>
 
-    where :
-     - software-descriptor-url : is an url pointing to a file listing the top level required bundles
-     - instance-descriptor-url : is an url pointing to a file containing VM deployment configuration
+where:
+
+ - `software-descriptor-url`: is an url pointing to a file listing the top level required bundles
+ - `instance-descriptor-url`: is an url pointing to a file containing VM deployment configuration
 
 The expected gains for this switch from maven to an OSGi distribution model are:
 
@@ -103,7 +102,7 @@ These features are very important for running a useful ECM platform on the Cloud
 
    => let end user change some configuration in Nuxeo Studio and directly see the result in his production system
 
- - we want to let able to add or remove services on a running application instance 
+ - we want to let able to add or remove services on a running application instance
 
    => let the end user subscribe to additional services and features
      ( without recreating a new instance or restarting the existing one)
@@ -128,14 +127,14 @@ This basically means that there should be a strong decoupling between the applic
 
 For that matter, OGSi model provides part of the solution since it standardize several aspects of the application life-cycle.
 
-For on premises deployments we need to be able :
+For on premises deployments we need to be able:
 
- - to propose alternative for the Cloud based features 
+ - to propose alternative for the Cloud based features
    (like standard DB/FS storage)
 
  - to run as a standard JEE application
 
-This second point may seem like a problem, but :
+This second point may seem like a problem, but:
 
  - this problem can be not addressed
 
@@ -143,18 +142,18 @@ This second point may seem like a problem, but :
 
 In fact several application servers have OSGi support, and Nuxeo EP currently deploys OSGi and Nuxeo Components in JBoss 5 and Tomcat 6.
 
-The difficulty will be to disturb as less as possible the people deploying on premises application :
+The difficulty will be to disturb as less as possible the people deploying on premises application:
 
- => this must be as simple and copying a WAR or an EAR
+=> this must be as simple and copying a WAR or an EAR
 
- => it does not means we need to deploy a real WAR or EAR
-    ( we can rely on deployment hooks and embedded OSGi runtime)
+=> it does not means we need to deploy a real WAR or EAR
+   (we can rely on deployment hooks and embedded OSGi runtime)
 
 ### Multi-tenancy
 
 We have use cases for using Nuxeo DM as a multi-tenant aware platform.
 
-The typical requirements are :
+The typical requirements are:
 
  - be able to have per-tenant data 
 
@@ -178,7 +177,7 @@ The typical requirements are :
 
 Traditional approaches for managing multi-tenant is to change the application so you have business rules to tell the software how to use shared the hardware resources between clients.
 
-This approach has several drawbacks in our case :
+This approach has several drawbacks in our case:
 
  - Making multi-tenant aware all software component is hard job
 
@@ -224,11 +223,10 @@ Even if we have a fully multi-tenant aware infrastructure, there will still be i
 
  - Improve fragment system (or align on OSGi partial standard)
 
-
 ### VM provisioning
 
 In order to automate instance creation, we need a vendor neutral API to provision cloud instances that will be used to deploy Nuxeo instances.
-Ideally, we want it to be integrated with the OSGi distribution system so that we can deploy in one command : Software distribution and Runtime environment.
+Ideally, we want it to be integrated with the OSGi distribution system so that we can deploy in one command: Software distribution and Runtime environment.
 
 ### Distributed storage 
 
@@ -248,7 +246,7 @@ Even if we have no immediate requirement, we want to explore the possibility to 
 
 The target is to be able to have a theoretical infinite scale storage for Nuxeo repository meta-data.
 
-This task is significantly more complex that simply addressing Binaries storage since we need to be able to :
+This task is significantly more complex that simply addressing Binaries storage since we need to be able to:
 
  - manage transactions
 
@@ -259,7 +257,6 @@ This task is significantly more complex that simply addressing Binaries storage 
 To be fare, this does not need to be a real NoSQL storage.
 Having a large scale RDBMS clustering and sharding system, would be good as well.
 
-
 ### Distributed Caching
 
 Nuxeo supports clustering at repository level.
@@ -268,7 +265,7 @@ The clustering model requires a cache system that can be synched between the Clu
 
 This is currently done:
 
- - using separated in memory "session caches" : 
+ - using separated in memory "session caches":
 
     - there is no intra-VM shared cache
 
